@@ -1,21 +1,4 @@
-// import Feedback from "components/Feedback/Feedback"
 
-// export const App = () => {
-//   return (
-//     <div
-//       style={{
-//         height: '100vh',
-//         display: 'flex',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         fontSize: 40,
-//         color: '#010101'
-//       }}
-//     >
-//      {/* <Feedback/> */}
-//     </div>
-//   );
-// };
 import Statistics from "./Statistics/Statistics"
 import FeedbackOptions from "./FeedbackOptions/FeedbackOptions"
 import Section from "./Section/Section"
@@ -59,9 +42,19 @@ state = {
         })
     }
 
+    totalFeedback = () => this.state.good + this.state.bad + this.state.neutral+1; 
+
+    
+    
+    positivePercantage = () => 
+    Math.round((this.state.good / (this.state.good + this.state.neutral + this.state.bad)) * 100)
+   
+    
+
     
   render() {
-      const {good, neutral, bad} = this.state
+      const { good, neutral, bad } = this.state
+     
     return <div
       style={{
         height: '100vh',
@@ -77,7 +70,7 @@ state = {
         <FeedbackOptions Good={this.Good} Neutral={this.Neutral} Bad={this.Bad} /> 
       </Section>
       <Section >
-        {good + neutral + bad === 0 ? <NotificationMessage /> : <Statistics good={good} neutral={neutral} bad={bad} total={good + neutral + bad} positivePercentage={Math.round((good / (good + neutral + bad)) * 100)} />}
+        {good + neutral + bad === 0 ? <NotificationMessage /> : <Statistics good={good} neutral={neutral} bad={bad} totalFeedback={this.totalFeedback()} positivePercentage={this.positivePercantage()} />}
         </Section>
       
         </div> 
